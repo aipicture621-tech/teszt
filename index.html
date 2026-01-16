@@ -1,6 +1,143 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Cím és Leírás -->
+    <title>Kreatívlenyomat - Egyedi Ajándékok és Fotókő Polgáron</title>
+    <meta name="description" content="Egyedi fényképes ajándékok, fotókövek, gravírozott emlékek és Valentin-napi örökrózsák készítése Polgáron. Rendeljen személyre szabott emléket!">
+    <link rel="canonical" href="https://kreativlenyomat.hu/">
+
+    <!-- Open Graph (Közösségi média megjelenés) -->
+    <meta property="og:title" content="Kreatívlenyomat - Egyedi Ajándékok Polgáron">
+    <meta property="og:description" content="Egyedi fényképes ajándékok és gravírozott emlékek készítése.">
+    <meta property="og:image" content="kepek/og-image.jpg">
+    <meta property="og:type" content="website">
+
+    <!-- Strukturált Adatok (JSON-LD) - SEO szempontból kritikus -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Kreatívlenyomat",
+      "description": "Egyedi ajándékok és fotókövek készítése Polgáron.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Polgár",
+        "addressCountry": "HU"
+      },
+      "url": "https://kreativlenyomat.hu"
+    }
+    </script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Akadálymentesítés: Ugorj a tartalomra link -->
+    <a href="#main-content" class="skip-link" style="position:absolute; left:-10000px;">Ugrás a tartalomra</a>
+
+    <header>
+        <div class="container">
+            <h1>Kreatívlenyomat</h1>
+            <p>Személyre szabott emlékek Polgárról</p>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <section class="hero">
+            <h2>Egyedi ajándékok, örök emlékek</h2>
+            <p>Válasszon kézzel készült, egyedi termékeink közül!</p>
+        </section>
+
+        <section class="products" aria-label="Termékkínálat">
+            <div class="product-grid">
+                
+                <!-- Termék kártya - Article használata SEO szempontból előnyösebb -->
+                <article class="product-card" itemscope itemtype="https://schema.org/Product">
+                    <img src="kepek/szuletes-karkoto-tarto-fa-ajandek.jpg" id="img-1" class="product-image-main" 
+                         onclick="openModal(this.src)" alt="Fából készült születési karkötő tartó egyedi felirattal" itemprop="image">
+                    
+                    <div class="product-gallery" role="group" aria-label="Termék galéria">
+                        <img src="kepek/szuletes-karkoto-tarto-fa-ajandek.jpg" onclick="changeImage('img-1', this.src)" alt="Születési karkötő tartó előlnézet">
+                        <img src="kepek/szuletes-karkoto-tarto-fa-ajandek-1.jpg" onclick="changeImage('img-1', this.src)" alt="Születési karkötő tartó részlet">
+                    </div>
+
+                    <h3 itemprop="name">Születési karkötő tartó</h3>
+                    <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                        <p class="price"><span itemprop="price" content="4500">4.500</span> <span itemprop="priceCurrency" content="HUF">Ft</span></p>
+                    </div>
+                    <button class="buy-button" onclick="openOrder('karkoto-tarto')" aria-label="Születési karkötő tartó megrendelése">Megrendelem</button>
+                </article>
+
+                <!-- További termékek hasonlóan optimalizálva... -->
+                <article class="product-card" itemscope itemtype="https://schema.org/Product">
+                    <img src="kepek/egyedi-fenykepes-fotoko-palako-ajandek.jpg" id="img-3" class="product-image-main" 
+                         onclick="openModal(this.src)" alt="Egyedi fényképes fotókő tartóval" itemprop="image">
+                    <h3 itemprop="name">Egyedi Fotókő</h3>
+                    <div itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                        <p class="price"><span itemprop="price" content="5900">5.900</span> Ft</p>
+                    </div>
+                    <button class="buy-button" onclick="openOrder('fotoko')">Megrendelem</button>
+                </article>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Modális ablakok a lap alján (jobb betöltési élmény) -->
+    <div id="imageModal" class="modal" role="dialog" aria-modal="true" aria-label="Képnagyítás">
+        <span class="close-modal" onclick="closeModal()" aria-label="Bezárás">&times;</span>
+        <img id="modalImg" src="" alt="Nagyított termékkép">
+    </div>
+
+    <div id="orderModal" class="modal" role="dialog" aria-modal="true" aria-label="Rendelési űrlap">
+        <div class="order-content">
+            <span class="close-modal" onclick="closeOrder()" aria-label="Bezárás">&times;</span>
+            <h2 style="color: #d4af37; text-align: center;">Megrendelés</h2>
+            
+            <form action="https://formspree.io/f/meeeqoyj" method="POST" class="order-form">
+                <label for="productSelect">Választott termék:</label>
+                <select name="termek" id="productSelect" required>
+                    <option value="karkoto-tarto">Születési karkötő tartó</option>
+                    <option value="fotoko">Egyedi Fotókő</option>
+                    <!-- Többi opció... -->
+                </select>
+
+                <label for="userName">Az Ön neve:</label>
+                <input type="text" id="userName" name="nev" placeholder="Teljes név" required>
+
+                <label for="userEmail">E-mail címe:</label>
+                <input type="email" id="userEmail" name="_replyto" placeholder="pelda@email.hu" required>
+
+                <label for="message">Üzenet vagy felirat szövege:</label>
+                <textarea id="message" name="message" rows="3" placeholder="Írja le az egyedi szöveget..."></textarea>
+
+                <div class="info-box">
+                    <p>📸 <strong>Fényképküldés:</strong> A fotót e-mailben vagy Messengeren tudja elküldeni az adategyeztetéskor.</p>
+                </div>
+
+                <div class="terms-container">
+                    <input type="checkbox" id="terms" required onchange="toggleButton()">
+                    <label for="terms">Elfogadom az adategyeztetési feltételeket.</label>
+                </div>
+
+                <button type="submit" id="submitBtn" class="submit-button" disabled>Megrendelés elküldése</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Kreatívlenyomat - Polgár. Minden jog fenntartva.</p>
+    </footer>
+
+    <script>
+        // ... (A scriptje marad, de javasolt a függvényeket külső JS fájlba tenni)
+    </script>
+</body>
+</html>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kreatívlenyomat - Egyedi Ajándékok és Fotókő</title>
@@ -187,5 +324,6 @@
     </script>
 </body>
 </html>
+
 
 
